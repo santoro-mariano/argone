@@ -11,7 +11,7 @@
     internal class Window: IDisposable
     {
         private static readonly object syncRoot = new();
-        private NativeWindow nativeWindow;
+        private readonly NativeWindow nativeWindow;
         private IWidget rootWidget;
         private GRContext skiaContext;
 

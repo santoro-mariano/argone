@@ -7,7 +7,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Argone.Core.Options;
-    using Argone.Core.Widgets;
     using GLFW;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
