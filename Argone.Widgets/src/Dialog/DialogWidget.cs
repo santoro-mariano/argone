@@ -17,6 +17,7 @@
             set
             {
                 this.backgroundColor = value;
+                this.backgroundPaint = value.ToSKPaint();
                 this.NotifyGraphicChange();
             }
         }
