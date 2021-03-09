@@ -8,15 +8,15 @@
     {
         Point Position { get; }
 
-        event EventHandler<MouseButtonEventArgs> ButtonPress;
+        event EventHandler<InputEventArgs<MouseButtonEventArgs>> ButtonPress;
 
-        event EventHandler Enter;
+        event EventHandler<InputEventArgs> Enter;
 
-        event EventHandler Leave;
+        event EventHandler<InputEventArgs> Leave;
 
-        event EventHandler<MouseMoveEventArgs> Moved;
+        event EventHandler<InputEventArgs<MouseMoveEventArgs>> Moved;
 
-        event EventHandler<MouseMoveEventArgs> Scroll;
+        event EventHandler<InputEventArgs<MouseMoveEventArgs>> Scroll;
         
         void SetCursor(CursorType cursorType);
 

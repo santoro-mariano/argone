@@ -5,10 +5,10 @@
 
     public interface IKeyboard
     {
-        event EventHandler<KeyEventArgs> KeyPress;
+        event EventHandler<InputEventArgs<KeyEventArgs>> KeyPress;
 
-        event EventHandler<KeyEventArgs> KeyRelease;
+        event EventHandler<InputEventArgs<KeyEventArgs>> KeyRelease;
 
-        event EventHandler<KeyEventArgs> KeyRepeat;
+        event EventHandler<InputEventArgs<KeyEventArgs>> KeyRepeat;
     }
 }

@@ -58,10 +58,10 @@
             }
         }
         
-        private void OnMouseButtonPress(object sender, MouseButtonEventArgs e)
+        private void OnMouseButtonPress(object sender, InputEventArgs<MouseButtonEventArgs> e)
         {
-            if (e.Button == MouseButton.Left &&
-                (e.Action == InputState.Press || e.Action == InputState.Repeat) &&
+            if (e.InnerEventArgs.Button == MouseButton.Left &&
+                (e.InnerEventArgs.Action == InputState.Press || e.InnerEventArgs.Action == InputState.Repeat) &&
                 this.dimensions.Contains(this.mouse.Position))
             {
                 Console.WriteLine("Button pressed!");

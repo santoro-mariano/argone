@@ -3,12 +3,11 @@
     using System;
     using System.ComponentModel;
     using System.Drawing;
-    using Argone.Core.Input;
     using Argone.Core.Widgets;
     using GLFW;
     using SkiaSharp;
 
-    internal class Window: IDisposable
+    internal partial class Window: IDisposable
     {
         private static readonly object syncRoot = new();
         private readonly NativeWindow nativeWindow;
@@ -139,85 +138,6 @@
             }
             
             Glfw.PostEmptyEvent();
-        }
-        
-        internal class Keyboard: IKeyboard
-        {
-            private Window window;
-        
-            public Keyboard(Window window)
-            {
-                this.window = window;
-            }
-
-            public event EventHandler<KeyEventArgs> KeyPress
-            {
-                add => this.window.nativeWindow.KeyPress += value;
-                remove => this.window.nativeWindow.KeyPress -= value;
-            }
-        
-            public event EventHandler<KeyEventArgs> KeyRelease
-            {
-                add => this.window.nativeWindow.KeyRelease += value;
-                remove => this.window.nativeWindow.KeyRelease -= value;
-            }
-            public event EventHandler<KeyEventArgs> KeyRepeat
-            {
-                add => this.window.nativeWindow.KeyRepeat += value;
-                remove => this.window.nativeWindow.KeyRepeat -= value;
-            }
-        }
-        
-        internal class Mouse: IMouse
-        {
-            private Window window;
-
-            public Mouse(Window window)
-            {
-                this.window = window;
-            }
-
-            public Point Position => this.window.nativeWindow.MousePosition;
-        
-            public event EventHandler<MouseButtonEventArgs> ButtonPress
-            {
-                add => this.window.nativeWindow.MouseButton += value;
-                remove => this.window.nativeWindow.MouseButton -= value;
-            }
-        
-            public event EventHandler Enter
-            {
-                add => this.window.nativeWindow.MouseEnter += value;
-                remove => this.window.nativeWindow.MouseEnter -= value;
-            }
-        
-            public event EventHandler Leave
-            {
-                add => this.window.nativeWindow.MouseLeave += value;
-                remove => this.window.nativeWindow.MouseLeave -= value;
-            }
-
-            public event EventHandler<MouseMoveEventArgs> Moved
-            {
-                add => this.window.nativeWindow.MouseMoved += value;
-                remove => this.window.nativeWindow.MouseMoved -= value;
-            }
-        
-            public event EventHandler<MouseMoveEventArgs> Scroll
-            {
-                add => this.window.nativeWindow.MouseScroll += value;
-                remove => this.window.nativeWindow.MouseScroll -= value;
-            }
-        
-            public void SetCursor(CursorType cursorType)
-            {
-                Glfw.SetCursor(this.window.nativeWindow, Glfw.CreateStandardCursor(CursorType.Hand));
-            }
-
-            public void ResetCursor()
-            {
-                Glfw.SetCursor(this.window.nativeWindow, Cursor.None);
-            }
         }
     }
 }
