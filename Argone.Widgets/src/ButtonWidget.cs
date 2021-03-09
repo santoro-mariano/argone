@@ -44,7 +44,7 @@
             this.boxWidget.Draw(canvas);
         }
         
-        private void OnMouseEvent(object sender, EventArgs e)
+        private void OnMouseEvent(object sender, InputEventArgs args)
         {
             if (this.dimensions.Contains(this.mouse.Position))
             {
@@ -58,13 +58,14 @@
             }
         }
         
-        private void OnMouseButtonPress(object sender, InputEventArgs<MouseButtonEventArgs> e)
+        private void OnMouseButtonPress(object sender, InputEventArgs<MouseButtonEventArgs> args)
         {
-            if (e.InnerEventArgs.Button == MouseButton.Left &&
-                (e.InnerEventArgs.Action == InputState.Press || e.InnerEventArgs.Action == InputState.Repeat) &&
+            if (args.InnerEventArgs.Button == MouseButton.Left &&
+                (args.InnerEventArgs.Action == InputState.Press || args.InnerEventArgs.Action == InputState.Repeat) &&
                 this.dimensions.Contains(this.mouse.Position))
             {
                 Console.WriteLine("Button pressed!");
+                args.Handled = true;
             }
         }
     }
