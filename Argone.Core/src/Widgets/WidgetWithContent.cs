@@ -24,7 +24,7 @@
             this.NotifyStructureChange();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             if (this.Content != null)
             {

@@ -14,7 +14,8 @@
                                      .AddWidget<ScrollBarWidget>()
                                      .AddWidget<TextWidget>()
                                      .AddWidget<ViewWidget>()
-                                     .AddWidget<DialogWidget>();
+                                     .AddWidget<DialogWidget>()
+                                     .AddWidget<MouseRegionWidget>();
         }
     }
 }

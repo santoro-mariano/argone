@@ -10,9 +10,9 @@
 
     public class ButtonWidget: WidgetWithContent
     {
+        private readonly MouseRegionWidget mouseRegionWidget;
         private readonly IMouse mouse;
         private readonly BoxWidget boxWidget;
-        private RectangleF dimensions;
 
         public ButtonWidget(IWidgetBuilder widgetBuilder, IMouse mouse)
         {
@@ -21,10 +21,9 @@
             this.boxWidget = widgetBuilder.BuildBox(0, border, 10);
             this.boxWidget.BackgroundColor = Color.FromArgb(250, 251, 252);
             this.boxWidget.AdjustSizeToChild = true;
-            this.mouse.Enter += this.OnMouseEvent;
-            this.mouse.Leave += this.OnMouseEvent;
-            this.mouse.Moved += this.OnMouseEvent;
-            this.mouse.ButtonPress += this.OnMouseButtonPress;
+            this.mouseRegionWidget = widgetBuilder.BuildMouseRegion(this.boxWidget);
+            this.mouseRegionWidget.Opaque = true;
+            this.SubscribeToEvents();
         }
 
         public override IWidget Content
@@ -35,37 +34,52 @@
 
         public override RectangleF Layout(RectangleF bounds, PointF dpiScale)
         {
-            this.dimensions = this.boxWidget.Layout(bounds, dpiScale);
-            return this.dimensions;
+            return this.mouseRegionWidget.Layout(bounds, dpiScale);
         }
 
         public override void Draw(SKCanvas canvas)
         {
-            this.boxWidget.Draw(canvas);
+            this.mouseRegionWidget.Draw(canvas);
+        }
+
+        public override void Dispose()
+        {
+            this.UnsubscribeFromEvents();
+            base.Dispose();
+        }
+
+        private void SubscribeToEvents()
+        {
+            this.mouseRegionWidget.Enter += this.OnMouseEnter;
+            this.mouseRegionWidget.Exit += this.OnMouseExit;
+            this.mouseRegionWidget.ButtonPress += this.OnMouseButtonPress;
         }
         
-        private void OnMouseEvent(object sender, InputEventArgs args)
+        private void UnsubscribeFromEvents()
         {
-            if (this.dimensions.Contains(this.mouse.Position))
-            {
-                this.mouse.SetCursor(CursorType.Hand);
-                this.boxWidget.BackgroundColor = Color.FromArgb(237, 240, 243);
-            }
-            else
-            {
-                this.mouse.ResetCursor();
-                this.boxWidget.BackgroundColor = Color.FromArgb(250, 251, 252);
-            }
+            this.mouseRegionWidget.Enter -= this.OnMouseEnter;
+            this.mouseRegionWidget.Exit -= this.OnMouseExit;
+            this.mouseRegionWidget.ButtonPress -= this.OnMouseButtonPress;
+        }
+
+        private void OnMouseEnter(object? sender, EventArgs e)
+        {
+            this.mouse.SetCursor(CursorType.Hand);
+            this.boxWidget.BackgroundColor = Color.FromArgb(237, 240, 243);
         }
         
-        private void OnMouseButtonPress(object sender, InputEventArgs<MouseButtonEventArgs> args)
+        private void OnMouseExit(object? sender, EventArgs e)
         {
-            if (args.InnerEventArgs.Button == MouseButton.Left &&
-                (args.InnerEventArgs.Action == InputState.Press || args.InnerEventArgs.Action == InputState.Repeat) &&
-                this.dimensions.Contains(this.mouse.Position))
+            this.mouse.ResetCursor();
+            this.boxWidget.BackgroundColor = Color.FromArgb(250, 251, 252);
+        }
+        
+        private void OnMouseButtonPress(object? sender, MouseButtonEventArgs args)
+        {
+            if (args.Button == MouseButton.Left &&
+                (args.Action == InputState.Press || args.Action == InputState.Repeat))
             {
                 Console.WriteLine("Button pressed!");
-                args.Handled = true;
             }
         }
     }
