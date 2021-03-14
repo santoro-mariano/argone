@@ -1,14 +1,11 @@
-﻿namespace Argone.Widgets
+﻿namespace Argone.Widgets.Layout
 {
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
-    using Argone.Core.Widgets;
     using SkiaSharp;
 
-    public class ListWidget: Widget, IDisposable
+    public class ListLayoutWidget: LayoutWidget
     {
-        private readonly List<IWidget> children = new();
         private ListOrientation orientation;
 
         public ListOrientation Orientation
@@ -19,13 +16,6 @@
                 this.orientation = value;
                 this.NotifyStructureChange();
             }
-        }
-
-        public void AddChild(IWidget widget)
-        {
-            this.children.Add(widget);
-            widget.Changed += this.OnChildChange;
-            this.NotifyStructureChange();
         }
 
         public override RectangleF Layout(RectangleF bounds, PointF dpiScale)
@@ -56,19 +46,6 @@
             {
                 child.Draw(canvas);
             }
-        }
-
-        public void Dispose()
-        {
-            foreach (var child in this.children)
-            {
-                child.Changed -= this.OnChildChange;
-            }
-        }
-        
-        private void OnChildChange(object sender, ChangedEventArgs eventArgs)
-        {
-            this.NotifyChange(sender, eventArgs);
         }
     }
 }

@@ -6,16 +6,17 @@
     using Argone.Widgets.Extensions;
     using SkiaSharp;
 
-    public class TestView: WidgetWithContent
+    public class TestView: ContainerWidget
     {
         private readonly ViewWidget view;
         
         public TestView(IWidgetBuilder widgetBuilder)
         {
             var button = widgetBuilder.BuildButton(widgetBuilder.BuildText("Click me!"));
+            button.Margin = new Edges<float>(20);
             // var dialog = widgetBuilder.BuildDialog(button);
             this.view = widgetBuilder.BuildView(button);
-            //ColorTranslator.FromHtml("#FFFFFF");
+            this.view.BackgroundColor = ColorTranslator.FromHtml("#383838");
         }
         
         public override RectangleF Layout(RectangleF bounds, PointF dpiScale)

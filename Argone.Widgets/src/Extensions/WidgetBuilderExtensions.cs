@@ -2,10 +2,11 @@
 {
     using System.Drawing;
     using Argone.Core.Widgets;
+    using Argone.Widgets.Input;
 
     public static class WidgetBuilderExtensions
     {
-        public static TWidget BuildWithContent<TWidget>(this IWidgetBuilder builder, IWidget content) where TWidget: WidgetWithContent
+        public static TWidget BuildContainer<TWidget>(this IWidgetBuilder builder, IWidget content) where TWidget: ContainerWidget
         {
             var widget = builder.Build<TWidget>();
             widget.Content = content;
@@ -30,12 +31,12 @@
 
         public static ButtonWidget BuildButton(this IWidgetBuilder builder, IWidget content)
         {
-            return builder.BuildWithContent<ButtonWidget>(content);
+            return builder.BuildContainer<ButtonWidget>(content);
         }
 
         public static ViewWidget BuildView(this IWidgetBuilder builder, IWidget content)
         {
-            return builder.BuildWithContent<ViewWidget>(content);
+            return builder.BuildContainer<ViewWidget>(content);
         }
 
         public static BoxWidget BuildBox(this IWidgetBuilder builder, float margin, Border border, float padding)
@@ -49,12 +50,12 @@
 
         public static DialogWidget BuildDialog(this IWidgetBuilder builder, IWidget content)
         {
-            return builder.BuildWithContent<DialogWidget>(content);
+            return builder.BuildContainer<DialogWidget>(content);
         }
         
         public static MouseRegionWidget BuildMouseRegion(this IWidgetBuilder builder, IWidget content)
         {
-            return builder.BuildWithContent<MouseRegionWidget>(content);
+            return builder.BuildContainer<MouseRegionWidget>(content);
         }
     }
 }

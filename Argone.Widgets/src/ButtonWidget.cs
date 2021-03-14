@@ -5,10 +5,11 @@
     using Argone.Core.Input;
     using Argone.Core.Widgets;
     using Argone.Widgets.Extensions;
+    using Argone.Widgets.Input;
     using GLFW;
     using SkiaSharp;
 
-    public class ButtonWidget: WidgetWithContent
+    public class ButtonWidget: ContainerWidget
     {
         private readonly MouseRegionWidget mouseRegionWidget;
         private readonly IMouse mouse;
@@ -30,6 +31,12 @@
         {
             get => this.boxWidget.Content;
             set => this.boxWidget.Content = value;
+        }
+
+        public Edges<float> Margin
+        {
+            get => this.boxWidget.Margin;
+            set => this.boxWidget.Margin = value;
         }
 
         public override RectangleF Layout(RectangleF bounds, PointF dpiScale)

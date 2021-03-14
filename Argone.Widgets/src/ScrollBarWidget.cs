@@ -8,7 +8,7 @@
     using GLFW;
     using SkiaSharp;
 
-    public class ScrollBarWidget: WidgetWithContent
+    public class ScrollBarWidget: ContainerWidget
     {
         private readonly IMouse mouse;
 

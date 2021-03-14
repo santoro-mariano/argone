@@ -5,7 +5,7 @@
     using Argone.Core.Widgets;
     using SkiaSharp;
 
-    public class BoxWidget: WidgetWithContent
+    public class BoxWidget: ContainerWidget
     {
         private RectangleF borderBounds;
         private RectangleF contentBounds;

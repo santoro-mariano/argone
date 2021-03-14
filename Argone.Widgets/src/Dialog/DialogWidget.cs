@@ -5,7 +5,7 @@
     using Argone.Core.Widgets;
     using SkiaSharp;
 
-    public class DialogWidget: WidgetWithContent
+    public class DialogWidget: ContainerWidget
     {
         private Color backgroundColor = Color.FromArgb(125, Color.Black);
         private SKPaint backgroundPaint = Color.FromArgb(125, Color.Black).ToSKPaint();

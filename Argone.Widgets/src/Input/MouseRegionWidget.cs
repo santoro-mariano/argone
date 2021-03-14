@@ -1,4 +1,4 @@
-﻿namespace Argone.Widgets
+﻿namespace Argone.Widgets.Input
 {
     using System;
     using System.Drawing;
@@ -7,7 +7,7 @@
     using GLFW;
     using SkiaSharp;
 
-    public class MouseRegionWidget: WidgetWithContent
+    public class MouseRegionWidget: ContainerWidget
     {
         private readonly IMouse mouse;
         private RectangleF dimensions;
@@ -66,7 +66,7 @@
             this.mouse.Scroll -= this.OnMouseScroll;
         }
         
-        private void OnMouseEvent(object? sender, InputEventArgs args)
+        private void OnMouseEvent(object sender, InputEventArgs args)
         {
             if (this.dimensions.Contains(this.mouse.Position))
             {
@@ -89,7 +89,7 @@
             }
         }
         
-        private void OnMouseButtonPress(object? sender, InputEventArgs<MouseButtonEventArgs> args)
+        private void OnMouseButtonPress(object sender, InputEventArgs<MouseButtonEventArgs> args)
         {
             if (this.dimensions.Contains(this.mouse.Position))
             {
@@ -98,7 +98,7 @@
             }
         }
         
-        private void OnMouseScroll(object? sender, InputEventArgs<MouseMoveEventArgs> args)
+        private void OnMouseScroll(object sender, InputEventArgs<MouseMoveEventArgs> args)
         {
             if (this.dimensions.Contains(this.mouse.Position))
             {

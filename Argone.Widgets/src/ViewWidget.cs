@@ -5,7 +5,7 @@
     using Argone.Core.Widgets;
     using SkiaSharp;
 
-    public class ViewWidget: WidgetWithContent
+    public class ViewWidget: ContainerWidget
     {
         private Color backgroundColor = Color.White;
         private SKColor backgroundSkiaColor = SKColors.White;

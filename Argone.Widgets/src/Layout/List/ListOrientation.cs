@@ -1,4 +1,4 @@
-﻿namespace Argone.Widgets
+﻿namespace Argone.Widgets.Layout
 {
     public enum ListOrientation
     {

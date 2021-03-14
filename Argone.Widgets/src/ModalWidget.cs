@@ -3,9 +3,10 @@
     using System.Drawing;
     using Argone.Core.Widgets;
     using Argone.Widgets.Extensions;
+    using Argone.Widgets.Layout;
     using SkiaSharp;
 
-    public class ModalWidget: WidgetWithContent
+    public class ModalWidget: ContainerWidget
     {
         public BoxWidget BoxWidget;
 
