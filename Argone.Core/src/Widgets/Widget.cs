@@ -8,7 +8,7 @@
 
     public abstract class Widget: IWidget
     {
-        private bool isVisible;
+        private bool isVisible = true;
         
         public IWidget Parent { get; set; }
 

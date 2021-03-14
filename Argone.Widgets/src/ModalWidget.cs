@@ -3,7 +3,6 @@
     using System.Drawing;
     using Argone.Core.Widgets;
     using Argone.Widgets.Extensions;
-    using Argone.Widgets.Layout;
     using SkiaSharp;
 
     public class ModalWidget: ContainerWidget
